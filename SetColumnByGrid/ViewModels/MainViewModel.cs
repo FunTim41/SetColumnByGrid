@@ -143,7 +143,15 @@ namespace SetColumnByGrid
             using (Transaction t = new Transaction(doc, "标高"))
             {
                 t.Start();
+                foreach (var item in allLevel)
+                {
+                    if (item.Name== "当前标高" || item.Name == "当前标高之上一标高")
+                    {
+                        doc.Delete(item.Id);
+                    }
+                }
                 curLevel = Level.Create(doc, doc.ActiveView.GenLevel.Elevation);
+               
                 curLevel.Name = "当前标高";
                 var level = allLevel.FirstOrDefault(i => i.Elevation > curLevel.Elevation);
                 if (level != null)

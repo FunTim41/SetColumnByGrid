@@ -32,10 +32,14 @@ namespace SetColumnByGrid
                 MainView mainView = new MainView(commandData);
                 mainView.Show();
                 return Result.Succeeded;
+            }catch (NullReferenceException )
+            {
+                TaskDialog.Show("Tip", "请选择正确的标高平面");
+                return Result.Failed;
             }
             catch (Exception ex)
             {
-                TaskDialog.Show("Tip", ex.Message);
+                TaskDialog.Show("Tip", ex.ToString());
                 return Result.Failed;
             }
         }
